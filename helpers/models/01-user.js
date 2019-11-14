@@ -6,10 +6,7 @@ module.exports = {
     findById,
     destroy,
     add,
-    getUserWorkouts,
-    addWorkoutToUser,
-    getUsersTarget,
-    getUsersSets,
+    getUserTrainingLogs,
 }
 
 function find(){
@@ -37,32 +34,9 @@ function destroy(id){
     return db('users').where({ id }).del()
 }
 
-function getUserWorkouts(userID){
-    return db('workouts')
-        .join('users', 'users.id', 'workouts.user_id')
-        .select('workouts.*' )
-        .where('workouts.user_id', userID)
-}
-
-function addWorkoutToUser(workout){
-    return db('workouts')
-    .insert({
-        name: workout.name,
-        date: workout.date,
-        user_id: workout.user_id
-    })
-}
-
-function getUsersTarget(userID){
-    return db('targetAreas')
-        .join('users', 'users.id', 'targetAreas.user_id')
-        .select('targetAreas.*' )
-        .where('targetAreas.user_id', userID)
-}
-
-function getUsersSets(userID){
-    return db('sets')
-        .join('users', 'users.id', 'sets.user_id')
-        .select('sets.*' )
-        .where('sets.user_id', userID)
+function getUserTrainingLogs(userID){
+    return db('trainingLogs')
+        .join('users', 'users.id', 'trainingLogs.user_id')
+        .select('trainingLogs.*' )
+        .where('trainingLogs.user_id', userID)
 }
