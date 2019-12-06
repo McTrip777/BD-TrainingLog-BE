@@ -2,7 +2,8 @@ const db = require('../../data/dbConfig');
 
 module.exports = {
     add,
-    getUserTrainingLogs
+    getUserTrainingLogs,
+    update
 }
 
 async function add(trainingLog){
@@ -16,4 +17,10 @@ function getUserTrainingLogs(userID){
         .join('users', 'users.id', 'trainingLogs.user_id')
         .select('trainingLogs.*' )
         .where('trainingLogs.user_id', userID)
+}
+
+async function update(id, changes){
+    return db('trainingLogs')
+        .where({id})
+        .update(changes)
 }

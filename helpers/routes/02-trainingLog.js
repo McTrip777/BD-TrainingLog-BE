@@ -24,4 +24,17 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    try {
+    let changes = await TrainingLog.update(req.params.id, req.body)
+    if(changes){
+        res.status(200).json(changes)
+    } else {
+        res.status(404).json('could not update')
+    }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
 module.exports = router
