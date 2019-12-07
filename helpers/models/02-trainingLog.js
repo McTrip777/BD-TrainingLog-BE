@@ -3,7 +3,8 @@ const db = require('../../data/dbConfig');
 module.exports = {
     add,
     getUserTrainingLogs,
-    update
+    update,
+    destroy
 }
 
 async function add(trainingLog){
@@ -23,4 +24,8 @@ async function update(id, changes){
     return db('trainingLogs')
         .where({id})
         .update(changes)
+}
+
+function destroy(id){
+    return db('trainingLogs').where({id}).del()
 }
